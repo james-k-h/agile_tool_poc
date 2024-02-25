@@ -4,6 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { Col, Button, Card, Container } from 'react-bootstrap';
 import TaskComponent from './TaskComponent';
+import AddTaskModal from './AddTaskModal';
 
 interface BoardSectionProps {
   title: String;
@@ -11,6 +12,13 @@ interface BoardSectionProps {
 }
 
 const BoardSection: React.FC<BoardSectionProps> = ({ title, tasks }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+  const handleShow = () => setShowModal(true);
+
   return (
     <>
       <Col md={3} className="d-flex flex-column p-2">
@@ -27,11 +35,31 @@ const BoardSection: React.FC<BoardSectionProps> = ({ title, tasks }) => {
                   title={task.title}
                   description={task.description}
                   id={task.id}
+                  boardCategory={title}
                 />
               );
             })}
+          {tasks.length > 0 && (
+            <Button className="add-wrapper" onClick={handleShow}>
+              <FontAwesomeIcon icon={faPlus} style={{ padding: '2px' }} />
+              Add Task
+            </Button>
+          )}
+          {tasks.length === 0 && (
+            <div className="is-empty d-flex flex-column">
+              <Button className="add-wrapper" onClick={handleShow}>
+                <FontAwesomeIcon icon={faPlus} style={{ padding: '2px' }} />
+                Add Task
+              </Button>
+            </div>
+          )}
         </Container>
       </Col>
+      <AddTaskModal
+        showModal={showModal}
+        handleClose={handleClose}
+        boardCategory={title}
+      />
     </>
   );
 };
