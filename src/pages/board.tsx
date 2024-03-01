@@ -56,9 +56,11 @@ const UpdateTaskMutation = gql`
 `;
 
 const Board = () => {
+  const [tasks, setTasks] = useState([]);
+  console.log(tasks);
   const { data, loading, error } = useQuery(AllTasksQuery, {
     onCompleted: (data) => {
-      console.log(data);
+      setTasks(data);
     },
   });
   const sections: Array<String> = ['Backlog', 'In-Progress', 'Review', 'Done'];
@@ -66,7 +68,7 @@ const Board = () => {
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
-    console.log(result);
+
     if (!destination) {
       return;
     }
@@ -81,6 +83,22 @@ const Board = () => {
         status: destination.droppableId,
       },
     });
+
+    const updatedTasksList =
+      tasks &&
+      (tasks.tasks || tasks).map((t: any) => {
+        // console.log(t);
+        if (t.id === draggableId) {
+          return {
+            ...t,
+            status: destination.droppableId,
+          };
+        } else {
+          return t;
+        }
+      });
+
+    setTasks(updatedTasksList);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -88,7 +106,7 @@ const Board = () => {
   return (
     <div className="pt-3 h-100 d-flex flex-column">
       <Row>
-        <h1>Project Title</h1>
+        <h1 className="p-2 text-center">Project Title</h1>
       </Row>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="board-container d-flex flex-row flex-grow-1">

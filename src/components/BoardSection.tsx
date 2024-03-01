@@ -22,15 +22,18 @@ const BoardSection: React.FC<BoardSectionProps> = ({ title, tasks }) => {
 
   return (
     <>
-      <Col md={3} className="d-flex flex-column p-2">
-        <div className="board-section-header d-flex flex-row align-items-center">
+      <Col
+        md={3}
+        className="d-flex flex-column p-4 text-center align-items-center "
+      >
+        <div className="board-section-header d-flex flex-row  ">
           <h3 className="me-auto">{title}</h3>
-          <FontAwesomeIcon icon={faPlus} style={{ color: '#6f7782' }} />
+          {/* <FontAwesomeIcon icon={faPlus} style={{ color: '#6f7782' }} /> */}
         </div>
         <Droppable droppableId={title}>
           {(provided) => (
             <Container
-              className="p-0 d-flex flex-column h-100"
+              className="p-0 d-flex flex-column h-100 text-center"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
