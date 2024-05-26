@@ -107,7 +107,8 @@ const TaskComponent: React.FC<Task> = ({
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
-            <Card.Body>{title}</Card.Body>
+            <Card.Body style={{ fontWeight: 'bold' }}>{title}</Card.Body>
+            <Card.Body>{description}</Card.Body>
           </Card>
         )}
       </Draggable>

@@ -18,6 +18,7 @@
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "graphql": "^16.8.1",
+    "jest": "^29.7.0",
     "micro-cors": "^0.1.1",
     "next": "14.1.0",
     "next-auth": "^4.24.6",

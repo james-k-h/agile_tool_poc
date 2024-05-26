@@ -104,7 +104,7 @@ const Board = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Oh no... {error.message}</p>;
   return (
-    <div className="pt-3 h-100 d-flex flex-column">
+    <div className="p-3 h-100 d-flex flex-column">
       <Row>
         <h1 className="p-2 text-center">Project Title</h1>
       </Row>
